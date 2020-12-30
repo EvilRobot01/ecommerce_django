@@ -3,7 +3,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, Permis
 from django.utils.translation import ugettext_lazy
 
 from django.db.models.signals import post_save
-from django.dispath import receiver
+from django.dispatch import receiver
 
 
 # Create your models here.
