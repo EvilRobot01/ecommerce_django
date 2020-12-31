@@ -9,6 +9,8 @@ from django.contrib.auth import login, logout, authenticate
 from App_Login.models import Profile
 from App_Login.forms import ProfileForm, SignUpForm
 
+#Messages
+from django.contrib import messages
 
 # Create your views here.
 def sign_up(request):
@@ -17,6 +19,7 @@ def sign_up(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Account created successfully')
             return HttpResponseRedirect(reverse('App_Login:login'))
     return render(request, 'App_Login/sign_up.html', context={'form':form})
 
@@ -38,6 +41,7 @@ def login_user(request):
 @login_required
 def logout_user(request):
     logout(request)
+    messages.success(request, 'You are logged out')
     return HttpResponse('Logged Out')
 
 
@@ -50,6 +54,6 @@ def user_profile(request):
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-
+            messages.success(request, 'Profile updated successfully')
             form = ProfileForm(instance=profile)
     return render(request, 'App_Login/change_profile.html', context={'form':form})
