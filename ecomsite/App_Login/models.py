@@ -35,7 +35,7 @@ class MyUserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, null=False)
     is_staff = models.BooleanField(ugettext_lazy('Staff Status'), default=False, help_text = ugettext_lazy('Designates whether the user can log in the site'))
-    is_active = models.BooleanField(ugettext_lazy('active'), default=False, help_text = ugettext_lazy('Designates whether this user should be treated as active'))
+    is_active = models.BooleanField(ugettext_lazy('active'), default=True, help_text = ugettext_lazy('Designates whether this user should be treated as active'))
 
     USERNAME_FIELD = 'email'
     objects = MyUserManager()
