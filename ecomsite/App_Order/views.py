@@ -39,7 +39,7 @@ def cart_view(request):
     orders = Order.objects.filter(user=request.user, ordered=False)
     if carts.exists() and orders.exists():
         order = orders[0]
-        return render(request, 'App_Order/cart.html', context={'carts':carts, 'orders':orders})
+        return render(request, 'App_Order/cart.html', context={'carts':carts, 'order':order})
     else:
         messages.warning(request, 'You do not have any item in your cart')
         return redirect('App_Shop:home')
