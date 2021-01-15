@@ -21,4 +21,8 @@ def checkout(request):
             form = BillingForm(instance=saved_address)
             messages.success(request, 'Shipping Address Saved!')
 
-    return render(request, 'App_Payment/checkout.html', context={'form': form})
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    order_items = order_qs[0].orderitems.all()
+    order_total = order_qs[0].get_total()
+
+    return render(request, 'App_Payment/checkout.html', context={'form': form, 'order_items':order_items, 'order_total':order_total})
